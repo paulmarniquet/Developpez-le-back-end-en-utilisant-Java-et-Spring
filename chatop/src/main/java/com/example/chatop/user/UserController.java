@@ -1,6 +1,7 @@
 package com.example.chatop.user;
 
 import com.example.chatop.dto.CredentialDto;
+import com.example.chatop.dto.RegisterDto;
 import com.example.chatop.dto.userDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,11 @@ public class UserController {
     public ResponseEntity<userDto> login(@RequestBody CredentialDto request) {
         userDto userDto = userService.login(request);
         return ResponseEntity.ok(userDto);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody RegisterDto request) {
+        User newUser = userService.register(request);
+        return ResponseEntity.ok(newUser);
     }
 }
