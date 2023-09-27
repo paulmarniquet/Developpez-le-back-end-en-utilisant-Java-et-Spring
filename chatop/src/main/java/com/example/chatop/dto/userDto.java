@@ -1,6 +1,5 @@
 package com.example.chatop.dto;
 
-import com.example.chatop.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

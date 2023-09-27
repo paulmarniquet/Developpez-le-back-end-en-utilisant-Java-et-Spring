@@ -17,7 +17,6 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final String secretKey = "jenaimepastropjava";
 
-
     public String generateToken(userDto user) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000);

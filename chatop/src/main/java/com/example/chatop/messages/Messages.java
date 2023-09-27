@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-
 import java.sql.Timestamp;
 
 @Data
@@ -12,7 +11,7 @@ import java.sql.Timestamp;
 @Table(name = "messages")
 public class Messages {
 
-    @jakarta.persistence.Id
+    @Id
 
     @Column(name="rental_id")
     private Integer rental_id;
