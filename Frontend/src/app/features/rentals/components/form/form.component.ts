@@ -18,6 +18,7 @@ export class FormComponent implements OnInit {
   public rentalForm: FormGroup | undefined;
 
   private id: string | undefined;
+  private owner_id: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class FormComponent implements OnInit {
     if (url.includes('update')) {
       this.onUpdate = true;
       this.id = this.route.snapshot.paramMap.get('id')!;
+      this.owner_id = this.route.snapshot.paramMap.get('owner_id')!;
       this.rentalsService
         .detail(this.id)
         .subscribe((rental: Rental) => this.initForm(rental));
@@ -48,9 +50,12 @@ export class FormComponent implements OnInit {
     formData.append('surface', this.rentalForm!.get('surface')?.value);
     formData.append('price', this.rentalForm!.get('price')?.value);
     if (!this.onUpdate) {
-      formData.append('picture', this.rentalForm!.get('picture')?.value._files[0]);
+      formData.append('picture', this.rentalForm!.get('picture')?.value._files[0].toString());
+      formData.append('owner_id', this.sessionService.user!.id.toString());
     }
     formData.append('description', this.rentalForm!.get('description')?.value);
+    let rental = this.rentalForm!.value;
+    console.log(rental);
 
     if (!this.onUpdate) {
       this.rentalsService
@@ -66,14 +71,15 @@ export class FormComponent implements OnInit {
   private initForm(rental?: Rental): void {
     console.log(rental);
     console.log(this.sessionService.user!.id);
-    if(rental?.owner_id !== this.sessionService.user!.id) {
+/*    if(rental?.owner_id != this.sessionService.user!.id) {
       this.router.navigate(['/rentals']);
-    }
+    }*/
     this.rentalForm = this.fb.group({
       name: [rental ? rental.name : '', [Validators.required]],
       surface: [rental ? rental.surface : '', [Validators.required]],
       price: [rental ? rental.price : '', [Validators.required]],
       description: [rental ? rental.description : '', [Validators.required]],
+      owner_id: this.id
     });
     if (!this.onUpdate) {
       this.rentalForm.addControl('picture', this.fb.control('', [Validators.required]));

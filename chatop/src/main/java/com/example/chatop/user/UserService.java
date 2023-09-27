@@ -5,17 +5,14 @@ import com.example.chatop.dto.CredentialDto;
 import com.example.chatop.dto.JwtTokenDto;
 import com.example.chatop.dto.RegisterDto;
 import com.example.chatop.dto.userDto;
-import com.example.chatop.rentals.Rentals;
-import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.nio.CharBuffer;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Optional;
 
 @Data
@@ -30,8 +27,7 @@ public class UserService {
     public JwtTokenDto login(CredentialDto request) {
         User user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (passwordEncoder.matches(CharBuffer.wrap(request.password()), passwordEncoder.encode(user.getPassword()))) {
+        if (passwordEncoder.matches(CharBuffer.wrap(request.password()), user.getPassword())) {
             userDto userDto = new userDto(user.getEmail(), user.getPassword());
             return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
         } else {
@@ -47,7 +43,10 @@ public class UserService {
             user.setEmail(request.email());
             user.setName(request.name());
             user.setRental_id(0);
-            user.setPassword(String.valueOf(CharBuffer.wrap(request.password())));
+            Timestamp date = new Timestamp(new Date().getTime());
+            user.setCreated_at(date);
+            user.setUpdated_at(date);
+            user.setPassword(passwordEncoder.encode(String.valueOf(CharBuffer.wrap(request.password()))));
             userRepository.save(user);
             userDto userDto = new userDto(user.getEmail(), user.getPassword());
             return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
