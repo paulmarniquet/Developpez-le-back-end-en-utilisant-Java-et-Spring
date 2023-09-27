@@ -5,27 +5,22 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.chatop.dto.userDto;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-
-import java.util.Base64;
+import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.Date;
 
 @RequiredArgsConstructor
+@Component
 public class JwtTokenProvider {
-    private String secretKey = "secret";
+    private final String secretKey = "jenaimepastropjava";
 
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-    }
 
     public String generateToken(userDto user) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 3600000); // 1 hour
+        Date validity = new Date(now.getTime() + 3600000);
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()
@@ -50,7 +45,6 @@ public class JwtTokenProvider {
 
         JWTVerifier verifier = JWT.require(algorithm)
                 .build();
-
         DecodedJWT decoded = verifier.verify(token);
 
         userDto user = userDto.builder()

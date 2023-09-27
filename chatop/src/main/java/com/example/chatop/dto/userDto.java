@@ -13,8 +13,4 @@ import lombok.NoArgsConstructor;
 public class userDto {
     private String email;
     private String password;
-
-    public static userDto ToUserDto(User user) {
-        return new userDto(user.getEmail(), user.getPassword());
-    }
 }

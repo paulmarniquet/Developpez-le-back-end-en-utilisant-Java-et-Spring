@@ -1,14 +1,20 @@
 package com.example.chatop.rentals;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
 
 @RestController @RequestMapping("/api")
 public class RentalsController {
 
     @Autowired
-    private RentalsService userService;
+    private RentalsService rentalService;
 
     /**
      * Read - Get all rentals
@@ -16,9 +22,18 @@ public class RentalsController {
      * @return - An Iterable object of Rentals
      */
     @GetMapping("/rentals")
-    public Iterable<Rentals> getRentals() {
-        return userService.getRentals();
+    public ResponseEntity<RentalResponse> getRentals() {
+        try {
+            List<Rentals> rentals = new ArrayList<>();
+            rentalService.getRentals().forEach(rentals::add);
+            RentalResponse rentalResponse = new RentalResponse(rentals);
+            return ResponseEntity.ok(rentalResponse);
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
+
 
     /**
      * Read - Get a rental by id
@@ -27,8 +42,14 @@ public class RentalsController {
      * @return A rental object
      */
     @GetMapping("/rentals/{id}")
-    public Optional<Rentals> getRental(@PathVariable Long id) {
-        return userService.getRental(id);
+    public ResponseEntity<Optional<Rentals>> getRental(@PathVariable Long id) {
+        try {
+            Optional<Rentals> rentalId = rentalService.getRental(id);
+            return ResponseEntity.ok(rentalId);
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     /**
@@ -37,8 +58,14 @@ public class RentalsController {
      * @return The rental object saved
      */
     @PostMapping("/rentals")
-    public Rentals saveRental(Rentals rental) {
-        return userService.saveRental(rental);
+    public ResponseEntity<String> saveRental(Rentals rental) {
+        try {
+            rentalService.saveRental(rental);
+            return ResponseEntity.ok("Rental created !");
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     /**
@@ -49,8 +76,14 @@ public class RentalsController {
      * @return The rental updated
      */
     @PutMapping("/rentals/{id}")
-    public Rentals updateRental(@PathVariable Long id, Rentals rental) {
-        return userService.updateRental(id, rental);
+    public ResponseEntity<String> updateRental(@PathVariable Long id, Rentals rental) {
+        try {
+            rentalService.updateRental(id, rental);
+            return ResponseEntity.ok("Rental updated !");
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     /**
@@ -61,7 +94,7 @@ public class RentalsController {
      */
     @DeleteMapping("/rentals/delete/{id}")
     public void deleteRental(@PathVariable Long id) {
-        userService.deleteRental(id);
+        rentalService.deleteRental(id);
     }
 
 }

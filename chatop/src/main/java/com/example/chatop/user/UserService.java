@@ -5,6 +5,8 @@ import com.example.chatop.dto.CredentialDto;
 import com.example.chatop.dto.JwtTokenDto;
 import com.example.chatop.dto.RegisterDto;
 import com.example.chatop.dto.userDto;
+import com.example.chatop.rentals.Rentals;
+import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.apache.tomcat.util.http.parser.Authorization;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.nio.CharBuffer;
+import java.util.Optional;
 
 @Data
 @Service
@@ -65,5 +68,9 @@ public class UserService {
         String email = new JwtTokenProvider().getUsernameFromToken(token);
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public Optional<User> getUser(Long id) {
+        return userRepository.findById(id);
     }
 }

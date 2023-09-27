@@ -1,6 +1,7 @@
 package com.example.chatop.messages;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController @RequestMapping("/api")
@@ -15,7 +16,16 @@ public class MessagesController {
      * @return The rental object saved
      */
     @PostMapping("/messages")
-    public Messages saveMessage(@RequestBody Messages request) {
-        return messagesService.saveMessage(request.getMessage(), request.getUser_id(), request.getRental_id());
+    public ResponseEntity<String> saveMessage(@RequestBody Messages request) {
+        try {
+            messagesService.saveMessage(request.getMessage(), request.getUser_id(), request.getRental_id());
+            return ResponseEntity.ok("Message send with success");
+        }
+        catch (Exception e) {
+            if (request.getMessage() == null || request.getUser_id() == null || request.getRental_id() == null)
+                return ResponseEntity.status(400).build();
+            else
+                return ResponseEntity.status(401).build();
+        }
     }
 }
