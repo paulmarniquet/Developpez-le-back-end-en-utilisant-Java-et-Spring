@@ -1,5 +1,8 @@
 package com.example.chatop.messages;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,13 @@ public class MessagesController {
      * @return ResponseEntity<String>
      */
     @PostMapping("/messages")
+    @Operation(summary = "Send a message on a rental")
+    @Parameter(name = "request", required = true, description = "The message object")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Message send with success"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Bad request"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<String> saveMessage(@RequestBody Messages request) {
         try {
             messagesService.saveMessage(request.getMessage(), request.getUser_id(), request.getRental_id());

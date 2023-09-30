@@ -1,5 +1,9 @@
 package com.example.chatop.rentals;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +26,11 @@ public class RentalsController {
      * @return A list of rentals
      */
     @GetMapping("/rentals")
+    @Operation(summary = "Get all rentals")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Get all rentals"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<RentalResponse> getRentals() {
         try {
             List<Rentals> rentals = new ArrayList<>();
@@ -40,6 +49,12 @@ public class RentalsController {
      * @return ResponseEntity<Optional < Rentals>>
      */
     @GetMapping("/rentals/{id}")
+    @Operation(summary = "Get a specific rental")
+    @Parameter(name = "id", required = true, description = "The id of the rental")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Get a specific rental"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<Optional<Rentals>> getRental(@PathVariable Long id) {
         try {
             Optional<Rentals> rentalId = rentalService.getRental(id);
@@ -55,6 +70,12 @@ public class RentalsController {
      * @return ResponseEntity<String>
      */
     @PostMapping("/rentals")
+    @Operation(summary = "Create a new rental")
+    @Parameter(name = "rental", required = true, description = "The rental object")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Created a new rental"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<String> saveRental(Rentals rental) {
         try {
             rentalService.saveRental(rental);
@@ -73,6 +94,15 @@ public class RentalsController {
      * @return ResponseEntity<String>
      */
     @PutMapping("/rentals/{id}")
+    @Operation(summary = "Update a rental")
+    @Parameters({
+            @Parameter(name = "id", required = true, description = "The id of the rental"),
+            @Parameter(name = "rental", required = true, description = "The rental object")
+    })
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Rental updated !"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<String> updateRental(@PathVariable Long id, Rentals rental) {
         try {
             rentalService.updateRental(id, rental);
@@ -88,6 +118,8 @@ public class RentalsController {
      * @param id The id of the rental
      */
     @DeleteMapping("/rentals/delete/{id}")
+    @Operation(summary = "Delete a rental")
+    @Parameter(name = "id", required = true, description = "The id of the rental")
     public void deleteRental(@PathVariable Long id) {
         rentalService.deleteRental(id);
     }

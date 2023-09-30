@@ -3,6 +3,9 @@ package com.example.chatop.user;
 import com.example.chatop.dto.CredentialDto;
 import com.example.chatop.dto.JwtTokenDto;
 import com.example.chatop.dto.RegisterDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,12 @@ public class UserController {
      * @return ResponseEntity<JwtTokenDto>
      */
     @PostMapping("/auth/login")
+    @Operation(summary = "Login a user")
+    @Parameter(name = "request", required = true, description = "The credential object")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Logged in with success"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<JwtTokenDto> login(@RequestBody CredentialDto request) {
         try {
             JwtTokenDto userDto = userService.login(request);
@@ -43,6 +52,12 @@ public class UserController {
      * @return ResponseEntity<JwtTokenDto>
      */
     @PostMapping("/auth/register")
+    @Operation(summary = "Register a new user")
+    @Parameter(name = "request", required = true, description = "The register object")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Registered with success"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Bad request"),
+    })
     public ResponseEntity<JwtTokenDto> register(@RequestBody RegisterDto request) {
         try {
             JwtTokenDto newUser = userService.register(request);
@@ -58,6 +73,12 @@ public class UserController {
      * @return ResponseEntity<User>
      */
     @GetMapping("auth/me")
+    @Operation(summary = "Get data of the current user")
+    @Parameter(name = "request", required = true, description = "The http request")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Get data of the current user"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<User> me(HttpServletRequest request) {
         try {
             User user = userService.me(request);
@@ -72,6 +93,12 @@ public class UserController {
      * @return The user object
      */
     @GetMapping("user/{id}")
+    @Operation(summary = "Get data of a user")
+    @Parameter(name = "id", required = true, description = "The id of the user")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Get data of a user"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
     public ResponseEntity<Optional<User>> getUser(@PathVariable Long id) {
         try {
             Optional<User> userId = userService.getUser(id);
