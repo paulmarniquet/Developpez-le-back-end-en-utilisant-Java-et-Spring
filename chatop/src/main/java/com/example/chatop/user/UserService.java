@@ -1,6 +1,6 @@
 package com.example.chatop.user;
 
-import com.example.chatop.JwtTokenProvider;
+import com.example.chatop.config.JwtTokenProvider;
 import com.example.chatop.dto.CredentialDto;
 import com.example.chatop.dto.JwtTokenDto;
 import com.example.chatop.dto.RegisterDto;

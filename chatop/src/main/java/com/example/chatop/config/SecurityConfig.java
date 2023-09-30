@@ -1,4 +1,4 @@
-package com.example.chatop;
+package com.example.chatop.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +32,8 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/login", "/api/auth/register")
                                 .permitAll()
                                 .requestMatchers("/api/**")
-                                .authenticated())
+                                .authenticated()
+                                .anyRequest().permitAll())
                 .sessionManagement(
                         sessionManagement -> sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

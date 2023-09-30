@@ -1,4 +1,4 @@
-package com.example.chatop;
+package com.example.chatop.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

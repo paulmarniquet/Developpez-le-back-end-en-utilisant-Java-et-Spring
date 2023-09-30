@@ -1,4 +1,4 @@
-package com.example.chatop;
+package com.example.chatop.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

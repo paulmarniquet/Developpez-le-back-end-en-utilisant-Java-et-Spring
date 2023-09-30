@@ -1,16 +1,15 @@
 package com.example.chatop.rentals;
 
-import com.example.chatop.dto.rentalDto;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Tag(name = "Rentals Controller", description = "Get, create, update and delete rentals")
 @RestController
 @RequestMapping("/api")
 public class RentalsController {
@@ -20,8 +19,7 @@ public class RentalsController {
 
     /**
      * Read - Get all rentals
-     *
-     * @return - An Iterable object of Rentals
+     * @return A list of rentals
      */
     @GetMapping("/rentals")
     public ResponseEntity<RentalResponse> getRentals() {
@@ -37,10 +35,9 @@ public class RentalsController {
 
 
     /**
-     * Read - Get a rental by id
-     *
+     * Read - Get one rental
      * @param id The id of the rental
-     * @return A rental object
+     * @return ResponseEntity<Optional < Rentals>>
      */
     @GetMapping("/rentals/{id}")
     public ResponseEntity<Optional<Rentals>> getRental(@PathVariable Long id) {
@@ -54,8 +51,8 @@ public class RentalsController {
 
     /**
      * Post - Create a new rental
-     *
-     * @return The rental object saved
+     * @param rental The rental object
+     * @return ResponseEntity<String>
      */
     @PostMapping("/rentals")
     public ResponseEntity<String> saveRental(Rentals rental) {
@@ -71,9 +68,9 @@ public class RentalsController {
     /**
      * Put - Update a rental
      *
-     * @param id     The id of the rental to update
-     * @param rental The rental object updated
-     * @return The rental updated
+     * @param id     The id of the rental
+     * @param rental The rental object
+     * @return ResponseEntity<String>
      */
     @PutMapping("/rentals/{id}")
     public ResponseEntity<String> updateRental(@PathVariable Long id, Rentals rental) {
@@ -88,8 +85,7 @@ public class RentalsController {
     /**
      * Delete - Delete a rental
      *
-     * @param id The id of the rental to delete
-     * @return HTTP status 200 if the operation is done successfully
+     * @param id The id of the rental
      */
     @DeleteMapping("/rentals/delete/{id}")
     public void deleteRental(@PathVariable Long id) {

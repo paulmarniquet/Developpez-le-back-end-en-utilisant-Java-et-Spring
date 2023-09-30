@@ -1,9 +1,11 @@
 package com.example.chatop.messages;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Message Controller", description = "Send a message")
 @RestController @RequestMapping("/api")
 public class MessagesController {
 
@@ -11,9 +13,9 @@ public class MessagesController {
     private MessagesService messagesService;
 
     /**
-     * Post - Create a new message
-     *
-     * @return The rental object saved
+     * Send a message
+     * @param request The message object
+     * @return ResponseEntity<String>
      */
     @PostMapping("/messages")
     public ResponseEntity<String> saveMessage(@RequestBody Messages request) {
