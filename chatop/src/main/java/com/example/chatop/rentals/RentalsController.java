@@ -85,7 +85,6 @@ public class RentalsController {
         }
     }
 
-
     /**
      * Put - Update a rental
      *

@@ -1,7 +1,7 @@
 package com.example.chatop.user;
+
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.sql.Timestamp;
 
 @Data
