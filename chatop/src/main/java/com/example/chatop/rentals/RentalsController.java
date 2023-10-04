@@ -1,5 +1,6 @@
 package com.example.chatop.rentals;
 
+import com.example.chatop.dto.rentalDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -76,7 +77,7 @@ public class RentalsController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Created a new rental"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
     })
-    public ResponseEntity<String> saveRental(Rentals rental) {
+    public ResponseEntity<String> saveRental(rentalDto rental) {
         try {
             rentalService.saveRental(rental);
             return ResponseEntity.ok("Rental created !");
