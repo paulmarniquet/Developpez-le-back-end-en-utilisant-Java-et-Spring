@@ -1,10 +1,10 @@
-package com.example.chatop.services;
+package com.example.chatop.service;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Optional;
 import com.example.chatop.dto.rentalDto;
-import com.example.chatop.entities.Rentals;
+import com.example.chatop.entity.Rentals;
 import com.example.chatop.repository.ImageRepository;
 import com.example.chatop.repository.RentalsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +47,7 @@ public class RentalsService {
         newRental.setUpdated_at(date);
 
         MultipartFile file = rental.getPicture();
+        System.out.println(file);
         ImageService imageService = new ImageService(imageRepository);
         try {
             imageService.uploadImage(file);

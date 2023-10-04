@@ -1,4 +1,4 @@
-package com.example.chatop.services;
+package com.example.chatop.service;
 
 import com.example.chatop.config.JwtTokenProvider;
 import com.example.chatop.dto.CredentialDto;
@@ -6,7 +6,7 @@ import com.example.chatop.dto.JwtTokenDto;
 import com.example.chatop.dto.RegisterDto;
 import com.example.chatop.dto.userDto;
 import com.example.chatop.repository.UserRepository;
-import com.example.chatop.entities.User;
+import com.example.chatop.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

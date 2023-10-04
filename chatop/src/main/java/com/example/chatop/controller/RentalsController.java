@@ -1,9 +1,9 @@
-package com.example.chatop.controllers;
+package com.example.chatop.controller;
 
 import com.example.chatop.dto.rentalDto;
 import com.example.chatop.config.RentalResponse;
-import com.example.chatop.entities.Rentals;
-import com.example.chatop.services.RentalsService;
+import com.example.chatop.entity.Rentals;
+import com.example.chatop.service.RentalsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

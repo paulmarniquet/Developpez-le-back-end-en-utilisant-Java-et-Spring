@@ -1,5 +1,5 @@
 package com.example.chatop.config;
-import com.example.chatop.entities.Rentals;
+import com.example.chatop.entity.Rentals;
 import lombok.Getter;
 import java.util.List;
 
