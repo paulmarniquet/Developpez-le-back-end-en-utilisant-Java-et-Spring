@@ -1,4 +1,4 @@
-package com.example.chatop.user;
+package com.example.chatop.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,5 +1,7 @@
-package com.example.chatop.messages;
+package com.example.chatop.controllers;
 
+import com.example.chatop.entities.Messages;
+import com.example.chatop.services.MessagesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

@@ -1,8 +1,10 @@
-package com.example.chatop.user;
+package com.example.chatop.controllers;
 
 import com.example.chatop.dto.CredentialDto;
 import com.example.chatop.dto.JwtTokenDto;
 import com.example.chatop.dto.RegisterDto;
+import com.example.chatop.entities.User;
+import com.example.chatop.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

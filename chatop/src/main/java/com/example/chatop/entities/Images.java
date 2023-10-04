@@ -1,4 +1,4 @@
-package com.example.chatop.images;
+package com.example.chatop.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

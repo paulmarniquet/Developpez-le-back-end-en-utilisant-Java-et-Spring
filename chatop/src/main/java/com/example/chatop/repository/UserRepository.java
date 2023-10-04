@@ -1,5 +1,6 @@
-package com.example.chatop.user;
+package com.example.chatop.repository;
 
+import com.example.chatop.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

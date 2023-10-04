@@ -1,4 +1,4 @@
-package com.example.chatop.images;
+package com.example.chatop.config;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

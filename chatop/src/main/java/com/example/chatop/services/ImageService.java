@@ -1,6 +1,8 @@
-package com.example.chatop.images;
+package com.example.chatop.services;
 
-import jakarta.annotation.Resource;
+import com.example.chatop.config.ImageUtils;
+import com.example.chatop.entities.Images;
+import com.example.chatop.repository.ImageRepository;
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

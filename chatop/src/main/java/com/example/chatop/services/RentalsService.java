@@ -1,21 +1,15 @@
-package com.example.chatop.rentals;
+package com.example.chatop.services;
 
-import java.net.URI;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Optional;
 import com.example.chatop.dto.rentalDto;
-import com.example.chatop.images.ImageController;
-import com.example.chatop.images.ImageRepository;
-import com.example.chatop.images.ImageService;
-import com.example.chatop.images.Images;
-import org.apache.commons.io.input.BufferedFileChannelInputStream;
+import com.example.chatop.entities.Rentals;
+import com.example.chatop.repository.ImageRepository;
+import com.example.chatop.repository.RentalsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import lombok.Data;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 

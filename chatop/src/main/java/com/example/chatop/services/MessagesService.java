@@ -1,5 +1,7 @@
-package com.example.chatop.messages;
+package com.example.chatop.services;
 
+import com.example.chatop.entities.Messages;
+import com.example.chatop.repository.MessagesRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.chatop.rentals;
+package com.example.chatop.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.sql.Timestamp;
