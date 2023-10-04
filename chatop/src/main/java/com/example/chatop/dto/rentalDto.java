@@ -1,5 +1,7 @@
 package com.example.chatop.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +14,21 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 @NoArgsConstructor
 @Builder
 public class rentalDto {
+
+    @NotBlank
     private String name;
+
+    @NotNull
     private String surface;
+
+    @NotNull
     private String price;
+
+    @NotNull
     private MultipartFile picture;
+
+    @NotBlank
     private String description;
+
     private String owner_id;
 }

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class UserController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Logged in with success"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
     })
-    public ResponseEntity<JwtTokenDto> login(@RequestBody CredentialDto request) {
+    public ResponseEntity<JwtTokenDto> login(@Valid @RequestBody CredentialDto request) {
         try {
             JwtTokenDto userDto = userService.login(request);
             return ResponseEntity.ok(userDto);
@@ -60,7 +61,7 @@ public class UserController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Registered with success"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Bad request"),
     })
-    public ResponseEntity<JwtTokenDto> register(@RequestBody RegisterDto request) {
+    public ResponseEntity<JwtTokenDto> register(@Valid @RequestBody RegisterDto request) {
         try {
             JwtTokenDto newUser = userService.register(request);
             return ResponseEntity.ok(newUser);

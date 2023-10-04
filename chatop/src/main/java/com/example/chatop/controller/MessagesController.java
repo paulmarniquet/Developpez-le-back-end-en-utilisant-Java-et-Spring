@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class MessagesController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Bad request"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
     })
-    public ResponseEntity<String> saveMessage(@RequestBody Messages request) {
+    public ResponseEntity<String> saveMessage(@Valid @RequestBody Messages request) {
         try {
             messagesService.saveMessage(request.getMessage(), request.getUser_id(), request.getRental_id());
             return ResponseEntity.ok("Message send with success");

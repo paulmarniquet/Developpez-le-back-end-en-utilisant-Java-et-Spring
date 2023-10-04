@@ -3,6 +3,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.sql.Timestamp;
 
@@ -19,6 +20,7 @@ public class Messages {
     @Column(name="user_id")
     private Integer user_id;
 
+    @NotBlank(message = "Message is mandatory")
     @Column (name="message")
     private String message;
 

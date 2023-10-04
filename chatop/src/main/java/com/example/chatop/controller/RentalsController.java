@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,7 +81,7 @@ public class RentalsController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Created a new rental"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
     })
-    public ResponseEntity<String> saveRental(rentalDto rental) {
+    public ResponseEntity<String> saveRental(@Valid rentalDto rental) {
         try {
             rentalService.saveRental(rental);
             return ResponseEntity.ok("Rental created !");
@@ -106,7 +107,7 @@ public class RentalsController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Rental updated !"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Unauthorized")
     })
-    public ResponseEntity<String> updateRental(@PathVariable Long id, Rentals rental) {
+    public ResponseEntity<String> updateRental(@PathVariable Long id, @Valid Rentals rental) {
         try {
             rentalService.updateRental(id, rental);
             return ResponseEntity.ok("Rental updated !");
