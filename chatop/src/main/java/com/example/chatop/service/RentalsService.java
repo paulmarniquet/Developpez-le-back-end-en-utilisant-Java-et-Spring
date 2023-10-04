@@ -3,10 +3,13 @@ package com.example.chatop.service;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
+
 import com.example.chatop.dto.rentalDto;
 import com.example.chatop.entity.Rentals;
 import com.example.chatop.repository.ImageRepository;
 import com.example.chatop.repository.RentalsRepository;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.Data;
@@ -47,15 +50,21 @@ public class RentalsService {
         newRental.setUpdated_at(date);
 
         MultipartFile file = rental.getPicture();
-        System.out.println(file);
         ImageService imageService = new ImageService(imageRepository);
+        String uniqueImageName = generateUniqueImageName(file.getOriginalFilename());
         try {
-            imageService.uploadImage(file);
+            imageService.uploadImage(file, uniqueImageName);
         } catch (Exception e) {
             System.out.println(e);
         }
-        newRental.setPicture("http://localhost:9099/image/" + file.getOriginalFilename());
+        newRental.setPicture("http://localhost:9099/image/" + uniqueImageName);
         userRepository.save(newRental);
+    }
+
+    public String generateUniqueImageName(String originalFileName) {
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String extension = FilenameUtils.getExtension(originalFileName);
+        return timestamp + "_" + UUID.randomUUID().toString() + "." + extension;
     }
 
     public Rentals updateRental(Long id, Rentals rental) {

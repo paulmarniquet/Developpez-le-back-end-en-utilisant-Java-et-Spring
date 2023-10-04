@@ -21,5 +21,6 @@ public class Images {
     private String type;
 
     @Lob
+    @Column(length = 65555)
     private byte[] imageData;
 }

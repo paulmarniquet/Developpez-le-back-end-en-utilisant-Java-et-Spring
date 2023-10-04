@@ -22,14 +22,14 @@ public class ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public String uploadImage(MultipartFile imageFile) throws IOException {
+    public String uploadImage(MultipartFile imageFile, String uniqueName) throws IOException {
         var imageToSave = Images.builder()
-                .name(imageFile.getOriginalFilename())
+                .name(uniqueName)
                 .type(imageFile.getContentType())
                 .imageData(ImageUtils.compressImage(imageFile.getBytes()))
                 .build();
         imageRepository.save(imageToSave);
-        return "Image uploaded successfully : " + imageFile.getOriginalFilename();
+        return "Image uploaded successfully : " + uniqueName;
     }
 
     public byte[] downloadImage(String imageName) {
