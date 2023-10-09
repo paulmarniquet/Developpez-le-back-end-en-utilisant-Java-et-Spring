@@ -15,19 +15,19 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 @Builder
 public class rentalDto {
 
-    @NotBlank
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Surface is mandatory")
     private String surface;
 
-    @NotNull
+    @NotNull(message = "Price is mandatory")
     private String price;
 
-    @NotNull
+    @NotNull(message = "Picture is mandatory")
     private MultipartFile picture;
 
-    @NotBlank
+    @NotBlank(message = "Description is mandatory")
     private String description;
 
     private String owner_id;

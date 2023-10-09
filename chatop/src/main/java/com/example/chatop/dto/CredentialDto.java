@@ -1,11 +1,11 @@
 package com.example.chatop.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 public record CredentialDto (
         @Email(message = "Invalid email address")
         String email,
-        @NotNull(message = "Password cannot be blank")
-        char[] password)
+        @NotBlank(message = "Password cannot be blank")
+        String password)
 {}

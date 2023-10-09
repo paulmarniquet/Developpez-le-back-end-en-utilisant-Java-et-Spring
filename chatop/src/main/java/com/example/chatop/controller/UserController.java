@@ -30,6 +30,7 @@ public class UserController {
 
     /**
      * Post - Login
+     *
      * @param request The credential object
      * @return ResponseEntity<JwtTokenDto>
      */
@@ -44,13 +45,14 @@ public class UserController {
         try {
             JwtTokenDto userDto = userService.login(request);
             return ResponseEntity.ok(userDto);
-        } catch (Exception e) {
-            return new ResponseEntity("Error: " + HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
+        } catch (Error e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
     /**
      * Post - Register
+     *
      * @param request The register object
      * @return ResponseEntity<JwtTokenDto>
      */
@@ -66,12 +68,13 @@ public class UserController {
             JwtTokenDto newUser = userService.register(request);
             return ResponseEntity.ok(newUser);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.badRequest().build();
         }
     }
 
     /**
      * Get - Me
+     *
      * @param request The http request
      * @return ResponseEntity<User>
      */
@@ -93,6 +96,7 @@ public class UserController {
 
     /**
      * Get - Get user
+     *
      * @return The user object
      */
     @GetMapping("user/{id}")
