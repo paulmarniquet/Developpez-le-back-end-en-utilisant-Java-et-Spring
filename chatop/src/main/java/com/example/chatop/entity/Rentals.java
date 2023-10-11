@@ -14,23 +14,22 @@ public class Rentals {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Name is mandatory")
     @Column(name="name")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Surface is mandatory")
     @Column(name="surface")
     private Integer surface;
 
-    @NotNull
+    @NotNull(message = "Price is mandatory")
     @Column(name="price")
     private Integer price;
 
-    @NotNull
     @Column(name="picture")
     private String picture;
 
-    @NotBlank
+    @NotBlank(message = "Description is mandatory")
     @Column(name="description")
     private String description;
 
